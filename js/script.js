@@ -176,6 +176,7 @@ const resultsScreen = document.getElementById('results-screen');
 
 const playerNameInput = document.getElementById('player-name');
 const startBtn = document.getElementById('start-btn');
+const studyBtn = document.getElementById('study-btn');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const restartBtn = document.getElementById('restart-btn');
@@ -204,6 +205,7 @@ let playerName = '';
 function init() {
     loadRanking();
     startBtn.addEventListener('click', startQuiz);
+    studyBtn.addEventListener('click', openStudyPDF);
     prevBtn.addEventListener('click', prevQuestion);
     nextBtn.addEventListener('click', nextQuestion);
     restartBtn.addEventListener('click', restartQuiz);
@@ -532,6 +534,10 @@ function goHome() {
     startScreen.classList.add('active');
 
     loadRanking();
+}
+
+function openStudyPDF() {
+    window.open('estudo.pdf', '_blank');
 }
 
 init();
