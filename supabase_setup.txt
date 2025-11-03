@@ -1,7 +1,0 @@
-Agora preciso da sua **Anon Key** do Supabase. Você pode encontrá-la em:
-
-1. Acesse seu projeto no Supabase
-2. Vá em Settings > API
-3. Copie a "anon public" key
-
-Me envie essa chave para que eu possa atualizar o código JavaScript com a integração do Supabase.
