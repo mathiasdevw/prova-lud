@@ -48,10 +48,10 @@
         
         .btn {
             display: inline-block;
-            background: var(--primary);
+            background: #000000; /* Preto sólido */
             color: white;
             padding: 10px 20px;
-            border: 2px solid var(--primary);
+            border: 2px solid #000000;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
@@ -60,10 +60,10 @@
         }
 
         .btn:hover {
-            background: #2980b9;
-            border-color: #2980b9;
+            background: #333333; /* Preto mais claro no hover */
+            border-color: #333333;
             transform: translateY(-1px);
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
         .btn-success {
