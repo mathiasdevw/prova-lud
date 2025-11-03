@@ -1,12 +1,12 @@
 <style>
         :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
+            --primary: #9b59b6;
+            --secondary: #6c3483;
             --success: #2ecc71;
             --danger: #e74c3c;
             --warning: #f39c12;
-            --light: #ecf0f1;
-            --dark: #34495e;
+            --light: #f8f4ff;
+            --dark: #4a235a;
         }
         
         * {
@@ -17,7 +17,8 @@
         }
         
         body {
-            background-color: #f5f7fa;
+            background: linear-gradient(135deg, #9b59b6 0%, #6c3483 100%);
+            min-height: 100vh;
             color: var(--dark);
             line-height: 1.6;
         }
@@ -30,10 +31,12 @@
         
         .screen {
             display: none;
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             margin-bottom: 20px;
         }
         
@@ -60,10 +63,10 @@
         }
 
         .btn:hover {
-            background: #2980b9;
-            border-color: #2980b9;
+            background: #8e44ad;
+            border-color: #8e44ad;
             transform: translateY(-1px);
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
         }
         
         .btn-success {
