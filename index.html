@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado - Sistemas Operacionais</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="start-screen" class="screen active">
+            <h1>Simulado - Sistemas Operacionais</h1>
+            <p>Teste seus conhecimentos sobre Chamadas de Sistema, Processos e Threads!</p>
+            <p>O simulado contém 15 questões de múltipla escolha. Você terá 20 minutos para completá-lo.</p>
+
+            <div style="margin: 20px 0;">
+                <label for="player-name">Digite seu nome:</label>
+                <input type="text" id="player-name" placeholder="Seu nome">
+            </div>
+
+            <button id="start-btn" class="btn">Iniciar Simulado</button>
+
+            <h2 style="margin-top: 30px;">Ranking</h2>
+            <div id="ranking-list">
+            </div>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="timer" id="timer">Tempo restante: 20:00</div>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+
+            <div class="question-container">
+                <div class="question" id="question-text">Pergunta</div>
+                <ul class="options" id="options-list">
+                </ul>
+
+                <div class="feedback" id="feedback">
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button id="prev-btn" class="btn btn-warning">Anterior</button>
+                <button id="next-btn" class="btn btn-success">Próxima</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h1>Resultados</h1>
+
+            <div class="results">
+                <div class="score" id="final-score">0/15</div>
+                <div class="percentage" id="percentage">0%</div>
+                <p id="performance-message">Mensagem de desempenho</p>
+            </div>
+
+            <h2>Ranking Atualizado</h2>
+            <div id="final-ranking">
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="restart-btn" class="btn">Fazer Novamente</button>
+                <button id="home-btn" class="btn btn-warning">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
