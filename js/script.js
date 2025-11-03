@@ -6,166 +6,166 @@ const questions = [
     {
         question: "O que são chamadas de sistema (system calls)?",
         options: [
+            "Protocolos de comunicação entre diferentes computadores",
             "Funções que permitem a comunicação entre aplicações e o núcleo do sistema operacional",
             "Comandos utilizados apenas por administradores de sistema",
-            "Protocolos de comunicação entre diferentes computadores",
             "Funções específicas para programação web"
         ],
-        correct: 0,
+        correct: 1,
         explanation: "Chamadas de sistema são interfaces que permitem que programas solicitem serviços do sistema operacional, como acesso a arquivos, criação de processos, etc."
     },
     {
         question: "Qual é a principal função das chamadas de sistema?",
         options: [
-            "Servir como ponte entre software e hardware",
+            "Criar interfaces gráficas",
             "Acelerar o processamento de dados",
-            "Substituir linguagens de programação",
-            "Criar interfaces gráficas"
+            "Servir como ponte entre software e hardware",
+            "Substituir linguagens de programação"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "As chamadas de sistema atuam como ponte entre o software e o hardware, permitindo que aplicações aproveitem os recursos do sistema de maneira controlada."
     },
     {
         question: "O que é um processo em sistemas operacionais?",
         options: [
-            "Um programa em execução, incluindo seus recursos como memória e tempo de CPU",
+            "Um comando executado no terminal",
             "Um arquivo de configuração do sistema",
-            "Um tipo específico de thread",
-            "Um comando executado no terminal"
+            "Um programa em execução, incluindo seus recursos como memória e tempo de CPU",
+            "Um tipo específico de thread"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Processos são programas em execução, cada um com seu próprio espaço de memória e recursos alocados pelo sistema operacional."
     },
     {
         question: "O que são threads?",
         options: [
-            "Unidades de execução dentro de um processo que compartilham recursos",
+            "Comandos de sistema operacional",
             "Processos independentes que não compartilham recursos",
-            "Tipos especiais de arquivos do sistema",
-            "Comandos de sistema operacional"
+            "Unidades de execução dentro de um processo que compartilham recursos",
+            "Tipos especiais de arquivos do sistema"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Threads são unidades de execução leves dentro de um processo, compartilhando o mesmo espaço de endereçamento e recursos."
     },
     {
         question: "Qual é a principal diferença entre processos e threads?",
         options: [
-            "Processos têm espaços de memória separados, threads compartilham memória",
-            "Threads são mais pesados que processos",
+            "Threads não podem ser executadas simultaneamente",
             "Processos não podem se comunicar entre si",
-            "Threads não podem ser executadas simultaneamente"
+            "Processos têm espaços de memória separados, threads compartilham memória",
+            "Threads são mais pesados que processos"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "A principal diferença é que processos são isolados com espaços de memória separados, enquanto threads compartilham o mesmo espaço de memória do processo."
     },
     {
         question: "Qual é uma vantagem das threads sobre os processos?",
         options: [
-            "Menor overhead na criação e comunicação",
+            "Podem executar em computadores diferentes",
             "Maior isolamento e segurança",
-            "Não precisam de sincronização",
-            "Podem executar em computadores diferentes"
+            "Menor overhead na criação e comunicação",
+            "Não precisam de sincronização"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Threads têm menor overhead porque compartilham recursos do processo, não necessitando de alocação separada de memória."
     },
     {
         question: "Qual mecanismo NÃO é usado para comunicação entre processos?",
         options: [
-            "Variáveis globais compartilhadas diretamente",
+            "Filas de mensagens",
             "Pipes (tubos)",
-            "Memória compartilhada",
-            "Filas de mensagens"
+            "Variáveis globais compartilhadas diretamente",
+            "Memória compartilhada"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Processos não compartilham variáveis globais diretamente porque têm espaços de memória separados. A comunicação requer mecanismos específicos como pipes, memória compartilhada ou filas de mensagens."
     },
     {
         question: "O que é uma condição de corrida (race condition)?",
         options: [
-            "Quando múltiplas threads acessam e modificam dados compartilhados simultaneamente, resultando em comportamento imprevisível",
+            "Quando há deadlock entre processos",
             "Quando um processo consome toda a CPU",
-            "Quando o sistema operacional não consegue escalonar processos",
-            "Quando há deadlock entre processos"
+            "Quando múltiplas threads acessam e modificam dados compartilhados simultaneamente, resultando em comportamento imprevisível",
+            "Quando o sistema operacional não consegue escalonar processos"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Condição de corrida ocorre quando o resultado de uma operação depende da sequência ou timing de execução de threads/processos, podendo levar a inconsistências."
     },
     {
         question: "Qual ferramenta é usada para restringir chamadas de sistema em contêineres?",
         options: [
-            "seccomp",
+            "compilador",
             "firewall",
-            "antivírus",
-            "compilador"
+            "seccomp",
+            "antivírus"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "O seccomp (secure computing mode) é um mecanismo de segurança do Linux que permite filtrar chamadas de sistema, restringindo quais syscalls um processo pode executar."
     },
     {
         question: "Qual chamada de sistema é usada para criar processos isolados em contêineres?",
         options: [
-            "clone()",
+            "wait()",
             "fork()",
-            "exec()",
-            "wait()"
+            "clone()",
+            "exec()"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "A syscall clone() é usada para criar processos com namespaces isolados, fundamental para a criação de contêineres."
     },
     {
         question: "O que é um deadlock?",
         options: [
-            "Situação onde dois ou mais processos/threads estão bloqueados esperando por recursos mantidos pelos outros",
-            "Quando um processo termina sua execução",
+            "Quando há falta de memória no sistema",
             "Quando o sistema operacional reinicia",
-            "Quando há falta de memória no sistema"
+            "Situação onde dois ou mais processos/threads estão bloqueados esperando por recursos mantidos pelos outros",
+            "Quando um processo termina sua execução"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Deadlock é uma situação de impasse onde processos/threads ficam bloqueados indefinidamente, cada um esperando por um recurso mantido por outro."
     },
     {
         question: "Qual padrão de design é usado para gerenciar threads de forma eficiente?",
         options: [
-            "Pool de Threads",
+            "Observer",
             "Singleton",
-            "Factory",
-            "Observer"
+            "Pool de Threads",
+            "Factory"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "O padrão Pool de Threads mantém um conjunto de threads reutilizáveis, evitando a sobrecarga de criar e destruir threads frequentemente."
     },
     {
         question: "Qual é uma desvantagem das threads em relação aos processos?",
         options: [
-            "Maior propensão a condições de corrida e deadlocks",
-            "Consomem mais memória",
+            "Não podem ser executadas em paralelo",
             "São mais lentas para criar",
-            "Não podem ser executadas em paralelo"
+            "Maior propensão a condições de corrida e deadlocks",
+            "Consomem mais memória"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Como threads compartilham memória, estão mais sujeitas a problemas de concorrência como condições de corrida e deadlocks."
     },
     {
         question: "Qual mecanismo é usado para sincronização entre threads?",
         options: [
-            "Mutex",
+            "Signal",
             "Pipe",
-            "Socket",
-            "Signal"
+            "Mutex",
+            "Socket"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "Mutex (mutual exclusion) é um mecanismo de sincronização que garante que apenas uma thread por vez acesse um recurso compartilhado."
     },
     {
         question: "Qual syscall é usada para alterar o diretório raiz de um processo?",
         options: [
-            "chroot()",
+            "mkdir()",
             "cd()",
-            "pwd()",
-            "mkdir()"
+            "chroot()",
+            "pwd()"
         ],
-        correct: 0,
+        correct: 2,
         explanation: "A syscall chroot() altera o diretório raiz aparente de um processo, sendo usada para isolamento em contêineres."
     }
 ];
