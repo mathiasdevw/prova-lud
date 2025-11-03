@@ -1,4 +1,9 @@
     <script>
+        // Configuração do Supabase
+        const supabaseUrl = 'https://cptjkajmrsftwuxcysoe.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdGprYWptcnNmdHd1eGN5c29lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MjY0OTgsImV4cCI6MjA3NzUwMjQ5OH0.6nVpZSAVhrThZrDcWfJnZJtcImDv78n9VhPYljsFUH0';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
         // Questões do simulado
         const questions = [
             {
@@ -211,12 +216,33 @@
             homeBtn.addEventListener('click', goHome);
         }
 
-        // Carregar ranking do localStorage
-        function loadRanking() {
-            const storedRanking = localStorage.getItem('quizRanking');
-            const ranking = storedRanking ? JSON.parse(storedRanking) : [];
-            
-            displayRanking(ranking, rankingList);
+        // Carregar ranking do Supabase
+        async function loadRanking() {
+            try {
+                const { data: ranking, error } = await supabase
+                    .from('ranking')
+                    .select('*')
+                    .order('score', { ascending: false })
+                    .order('timestamp', { ascending: false })
+                    .limit(10);
+
+                if (error) {
+                    console.error('Erro ao carregar ranking:', error);
+                    // Fallback para localStorage se houver erro
+                    const storedRanking = localStorage.getItem('quizRanking');
+                    const fallbackRanking = storedRanking ? JSON.parse(storedRanking) : [];
+                    displayRanking(fallbackRanking, rankingList);
+                    return;
+                }
+
+                displayRanking(ranking, rankingList);
+            } catch (error) {
+                console.error('Erro ao carregar ranking:', error);
+                // Fallback para localStorage
+                const storedRanking = localStorage.getItem('quizRanking');
+                const fallbackRanking = storedRanking ? JSON.parse(storedRanking) : [];
+                displayRanking(fallbackRanking, rankingList);
+            }
         }
 
         // Exibir ranking
@@ -438,12 +464,42 @@
         }
 
         // Salvar resultado no ranking
-        function saveToRanking(name, score, percentage) {
-            // Carregar ranking atual
+        async function saveToRanking(name, score, percentage) {
+            try {
+                // Salvar no Supabase
+                const { data, error } = await supabase
+                    .from('ranking')
+                    .insert([
+                        {
+                            name: name,
+                            score: score,
+                            percentage: percentage
+                        }
+                    ]);
+
+                if (error) {
+                    console.error('Erro ao salvar no Supabase:', error);
+                    // Fallback para localStorage
+                    saveToLocalStorage(name, score, percentage);
+                    return;
+                }
+
+                // Recarregar ranking do Supabase
+                await loadRanking();
+                displayRanking(await getRankingFromSupabase(), finalRanking);
+
+            } catch (error) {
+                console.error('Erro ao salvar ranking:', error);
+                // Fallback para localStorage
+                saveToLocalStorage(name, score, percentage);
+            }
+        }
+
+        // Fallback para localStorage
+        function saveToLocalStorage(name, score, percentage) {
             const storedRanking = localStorage.getItem('quizRanking');
             const ranking = storedRanking ? JSON.parse(storedRanking) : [];
-            
-            // Adicionar novo resultado (marcar como atual)
+
             const newEntry = {
                 name: name,
                 score: score,
@@ -451,33 +507,41 @@
                 timestamp: new Date().toISOString(),
                 current: true
             };
-            
-            // Remover marcação "current" de entradas anteriores
-            ranking.forEach(entry => {
-                entry.current = false;
-            });
-            
-            // Adicionar nova entrada
+
+            ranking.forEach(entry => entry.current = false);
             ranking.push(newEntry);
-            
-            // Ordenar por pontuação (maior para menor) e depois por timestamp (mais recente primeiro)
+
             ranking.sort((a, b) => {
-                if (b.score !== a.score) {
-                    return b.score - a.score;
-                }
+                if (b.score !== a.score) return b.score - a.score;
                 return new Date(b.timestamp) - new Date(a.timestamp);
             });
-            
-            // Manter apenas os top 10
-            if (ranking.length > 10) {
-                ranking.splice(10);
-            }
-            
-            // Salvar no localStorage
+
+            if (ranking.length > 10) ranking.splice(10);
+
             localStorage.setItem('quizRanking', JSON.stringify(ranking));
-            
-            // Exibir ranking atualizado
             displayRanking(ranking, finalRanking);
+        }
+
+        // Obter ranking do Supabase
+        async function getRankingFromSupabase() {
+            try {
+                const { data: ranking, error } = await supabase
+                    .from('ranking')
+                    .select('*')
+                    .order('score', { ascending: false })
+                    .order('timestamp', { ascending: false })
+                    .limit(10);
+
+                if (error) {
+                    console.error('Erro ao obter ranking:', error);
+                    return [];
+                }
+
+                return ranking;
+            } catch (error) {
+                console.error('Erro ao obter ranking:', error);
+                return [];
+            }
         }
 
         // Reiniciar o simulado
