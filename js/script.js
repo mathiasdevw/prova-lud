@@ -1,5 +1,4 @@
-    <script>
-        // Configuração do Supabase
+    // Configuração do Supabase
         const supabaseUrl = 'https://cptjkajmrsftwuxcysoe.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwdGprYWptcnNmdHd1eGN5c29lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE5MjY0OTgsImV4cCI6MjA3NzUwMjQ5OH0.6nVpZSAVhrThZrDcWfJnZJtcImDv78n9VhPYljsFUH0';
         const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -405,13 +404,39 @@
                 alert('Por favor, selecione uma resposta antes de continuar.');
                 return;
             }
-            
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                showQuestion();
-            } else {
-                finishQuiz();
-            }
+
+            // Marcar resposta como final (não pode mais alterar)
+            const question = questions[currentQuestion];
+            const userAnswer = userAnswers[currentQuestion];
+
+            // Mostrar feedback final
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswer && userAnswer !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+
+            feedback.textContent = question.explanation;
+            feedback.className = `feedback ${userAnswer === question.correct ? 'correct' : 'incorrect'}`;
+
+            // Desabilitar seleção de opções
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+                option.style.opacity = '0.7';
+            });
+
+            // Pequeno delay antes de ir para próxima
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    finishQuiz();
+                }
+            }, 2000); // 2 segundos para ver o feedback
         }
 
         // Pergunta anterior
@@ -558,10 +583,8 @@
             resultsScreen.classList.remove('active');
             startScreen.classList.add('active');
             
-            // Recarregar ranking
             loadRanking();
         }
 
-        // Inicializar o aplicativo
         init();
-    </script>
+    init();
